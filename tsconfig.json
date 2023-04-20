@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -14,10 +18,76 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@assets/icons/*": [
+        "./src/frontend/core/assets/icons/*"
+      ],
+      "@components/atoms": [
+        "./src/frontend/presentations/components/atoms"
+      ],
+      "@components/atoms/*": [
+        "./src/frontend/presentations/components/atoms/*"
+      ],
+      "@components/molecules": [
+        "./src/frontend/presentations/components/molecules"
+      ],
+      "@components/molecules/*": [
+        "./src/frontend/presentations/components/molecules/*"
+      ],
+      "@components/organisms": [
+        "./src/frontend/presentations/components/organisms"
+      ],
+      "@components/organisms/*": [
+        "./src/frontend/presentations/components/organisms/*"
+      ],
+      "@components/templates": [
+        "./src/frontend/presentations/components/templates"
+      ],
+      "@components/templates/*": [
+        "./src/frontend/presentations/components/templates/*"
+      ],
+      "@components/pages": [
+        "./src/frontend/presentations/components/pages"
+      ],
+      "@components/pages/*": [
+        "./src/frontend/presentations/components/pages/*"
+      ],
+      "@styles": [
+        "./src/frontend/core/styles"
+      ],
+      "@styles/*": [
+        "./src/frontend/core/styles/*"
+      ],
+      "@libraries/*": [
+        "./src/frontend/core/libraries/*"
+      ],
+      "@hooks/*": [
+        "./src/frontend/presentations/hooks/*"
+      ],
+      "@utils": [
+        "./src/frontend/presentations/utils"
+      ],
+      "@general-types": [
+        "./src/frontend/presentations/general-types"
+      ],
+      "@static/*": [
+        "./src/frontend/presentations/static/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
