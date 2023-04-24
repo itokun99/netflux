@@ -1,16 +1,10 @@
 import { memo } from 'react';
-import { ColorType } from '@general-types';
 import { ButtonProps } from './types';
-import { Btn, BtnIcon, TextContent } from './styled';
+import { Btn, BtnIcon, TextContent, BtnLoader } from './styled';
+import { getBtnIconColor } from './utils';
 
 
 
-const getBtnIconColor = (variant?: string, color?: ColorType) => {
-  if (variant === 'outlined') {
-    return color;
-  }
-  return ['primary', 'success', 'error', 'dark'].includes(color || '') ? 'light' : 'dark';
-}
 
 const Button: React.FC<ButtonProps> = ({
   children,
@@ -19,7 +13,11 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'contained',
   size = 'default',
   icon,
-  onClick
+  block,
+  disabled,
+  loading,
+  loadingText = 'Loading...',
+  onClick,
 }) => {
 
   const btnIconColor = getBtnIconColor(variant, color);
@@ -27,6 +25,8 @@ const Button: React.FC<ButtonProps> = ({
 
   const renderIcon = () => {
     if (!icon) return null;
+
+    if (loading) return <BtnLoader size={btnIconSize} color={color} />
 
     if (typeof icon === 'string') {
       return (
@@ -45,12 +45,12 @@ const Button: React.FC<ButtonProps> = ({
       return (
         <>
           {renderIcon()}
-          <TextContent element='span' color={btnIconColor}>{children}</TextContent>
+          <TextContent element='span' color={btnIconColor}>{loading ? loadingText : children}</TextContent>
         </>
       )
     }
 
-    return children;
+    return loading ? loadingText : children;
   }
 
   return (
@@ -60,7 +60,10 @@ const Button: React.FC<ButtonProps> = ({
       variant={variant}
       size={size}
       icon={icon}
-      onClick={onClick}
+      onClick={!disabled && !loading ? onClick : undefined}
+      block={block}
+      disabled={disabled}
+      loading={loading}
     >
       {renderContent()}
     </Btn>

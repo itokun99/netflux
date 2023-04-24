@@ -47,7 +47,7 @@ export const AppLogo = styled(Logo)`
 `;
 
 export const SearchBarForm = styled.form`
-  max-width: 300px;
+  max-width: 250px;
   transition: .2s ease-in-out;
   @media screen and (max-width: ${AppContainerEnum.phoneLandscape}px) {
     max-width: 100%;

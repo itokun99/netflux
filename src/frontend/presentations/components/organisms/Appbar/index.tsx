@@ -1,4 +1,4 @@
-import { memo, useState, useMemo, useEffect, useRef } from 'react';
+import { memo, useMemo, useEffect, useRef, useReducer, Reducer } from 'react';
 import { createPortal } from 'react-dom';
 import { APP_MENUS } from '@static/menus';
 import Button from '@components/atoms/Button';
@@ -20,57 +20,58 @@ import {
   SearchBarForm
 } from './styled';
 
+import { appbarState, appbarReducer } from './states';
+
+
+
+
+
+
 // main component
 function Appbar() {
 
   // memo
   const menus = useMemo(() => APP_MENUS, []);
 
-  // states
-  const [sidebarReady, setSidebarReady] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
-  const { windowSize, isDesktopSize } = useWindowSize();
-  const [searchBarFocus, setSearchBarFocus] = useState(false);
-  const [showLeftSection, setShowLeftSection] = useState(true);
+  // reducer
+  const [state, dispatch] = useReducer(appbarReducer, appbarState)
 
+  // states
+  const { windowSize, isDesktopSize } = useWindowSize();
 
   // refs
   const portalContainer = useRef<HTMLElement>();
 
   // other variables
-  const isShowLeftSection = windowSize.width && windowSize.width > AppContainerEnum.phoneLandscape ? true : showLeftSection;
+  const isShowLeftSection = windowSize.width && windowSize.width > AppContainerEnum.phoneLandscape ? true : state.showLeftSection;
 
   // methods / functions
   const handleFocusSearchBar = () => {
-    setSearchBarFocus(true);
+    dispatch({ type: 'searchbar-focus' });
   }
 
   const handleBlurSearchBar = () => {
-    setSearchBarFocus(false);
+    dispatch({ type: 'searchbar-blur' });
   }
 
   const handleToggleSidebar = () => {
-    setShowSidebar(show => !show);
+    dispatch({ type: 'toggle-sidebar' });
   }
-
-  useEffect(() => {
-    setShowLeftSection(!searchBarFocus);
-  }, [searchBarFocus]);
 
   useEffect(() => {
     const portalEl = document.getElementById('__next');
     if (portalEl) {
       portalContainer.current = portalEl;
-      setSidebarReady(true);
+      dispatch({ type: 'ready-sidebar' });
     }
   }, []);
 
 
   useEffect(() => {
-    if (sidebarReady && portalContainer.current) {
-      toggleBodyScroll(!showSidebar);
+    if (state.sidebarReady && portalContainer.current) {
+      toggleBodyScroll(!state.showSidebar);
     }
-  }, [sidebarReady, showSidebar])
+  }, [state.sidebarReady, state.showSidebar]);
 
   // render functions
   const renderActionButtonDesktop = () => {
@@ -87,9 +88,9 @@ function Appbar() {
         <ActionButtonWrapper>
           <IconButton onClick={handleToggleSidebar} variant='contained' color='primary' icon="ic-bar" size="small" />
         </ActionButtonWrapper>
-        {sidebarReady && portalContainer.current && createPortal((
+        {state.sidebarReady && portalContainer.current && createPortal((
           <Sidebar
-            show={showSidebar}
+            show={state.showSidebar}
             onClose={handleToggleSidebar}
             menus={menus}
           />
@@ -103,7 +104,7 @@ function Appbar() {
       <Container>
         {isShowLeftSection && (
           <LeftSection>
-            <AppLogo color="primary" />
+            <AppLogo color="primary" size={34} />
             {isDesktopSize && <AppMenu items={menus} />}
           </LeftSection>
         )}

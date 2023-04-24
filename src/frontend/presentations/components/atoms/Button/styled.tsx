@@ -1,12 +1,13 @@
 import Icon from '@components/atoms/Icon';
 import Text from '@components/atoms/Text';
+import Loader from '@components/atoms/Loader';
 import styled, { css } from 'styled-components';
 import { FontSizeEnum } from '@styles/fonts';
 import { AppSpacingEnum } from '@styles/matrix';
 import { AppColorEnum } from '@styles/colors';
 import { ButtonProps } from './types';
 
-const buttonBaseStyle = css`
+const buttonBaseStyle = css<Pick<ButtonProps, 'block'>>`
   font-size: ${FontSizeEnum.m}px;
   line-height: ${AppSpacingEnum.xl}px;
   padding-top: ${AppSpacingEnum.xs}px;
@@ -17,7 +18,7 @@ const buttonBaseStyle = css`
   border-radius: 6px;
   outline: none;
   transition: .2s ease-in-out;
-  display: inline-block;
+  display: ${(props) => props.block ? 'block; width: 100%;' : 'inline-block'};
   font-weight: 500;
   cursor: pointer;
 
@@ -34,7 +35,7 @@ const buttonColorStyle = css<Pick<ButtonProps, 'color' | 'variant'>>(({ color, v
   if (variant === 'contained') {
     const baseColor = AppColorEnum[color as keyof typeof AppColorEnum];
 
-    return `
+    return css`
       background-color: ${baseColor};
       border-color: ${baseColor};
       color: ${['primary', 'success', 'error', 'dark'].includes(color || '') ? AppColorEnum.light : AppColorEnum.dark};
@@ -49,7 +50,7 @@ const buttonColorStyle = css<Pick<ButtonProps, 'color' | 'variant'>>(({ color, v
   if (variant === 'outlined') {
     const baseColor = AppColorEnum[color as keyof typeof AppColorEnum];
 
-    return `
+    return css`
       background-color: transparent;
       border-color: ${baseColor};
       color: ${baseColor};
@@ -68,7 +69,7 @@ const buttonColorStyle = css<Pick<ButtonProps, 'color' | 'variant'>>(({ color, v
 
 const buttonSizeStyle = css<Pick<ButtonProps, 'size'>>(({ size }) => {
   if (size === 'small') {
-    return `
+    return css`
       padding-top: ${AppSpacingEnum.xxs + 2}px;
       padding-bottom: ${AppSpacingEnum.xxs + 2}px;
       padding-left: ${AppSpacingEnum.m}px;
@@ -88,7 +89,7 @@ const buttonSizeStyle = css<Pick<ButtonProps, 'size'>>(({ size }) => {
   }
 
   if (size === 'large') {
-    return `
+    return css`
       padding-top: ${AppSpacingEnum.xs}px;
       padding-bottom: ${AppSpacingEnum.xs}px;
       padding-left: ${AppSpacingEnum.xl}px;
@@ -109,7 +110,7 @@ const btnIconStyle = css<Pick<ButtonProps, 'icon' | 'variant' | 'color'>>(({ ico
     return ``;
   }
 
-  return `
+  return css`
     &:hover > span, &:focus > span {
       color: ${['primary', 'success', 'error', 'dark'].includes(color || '') ? AppColorEnum.light : AppColorEnum.dark};
     }
@@ -120,11 +121,32 @@ const btnIconStyle = css<Pick<ButtonProps, 'icon' | 'variant' | 'color'>>(({ ico
   `
 })
 
-export const Btn = styled.button<Pick<ButtonProps, 'color' | 'variant' | 'size' | 'icon'>>`
+export const btnDisabledStyle = css<Pick<ButtonProps, 'disabled' | 'color'>>(props => {
+
+  if (!props.disabled) return '';
+
+  return css`
+    background-color: ${AppColorEnum.bgDisabled};
+    border-color: ${AppColorEnum.bgDisabled};
+    cursor: not-allowed;
+    &:active, &:focus, &:hover {
+      outline: none;
+      box-shadow: 0 0 5px 0px ${AppColorEnum.bgDisabled};
+      background-color: ${AppColorEnum.bgDisabled};
+    }
+
+    &:active {
+      scale: none;
+    }
+  `
+});
+
+export const Btn = styled.button<Pick<ButtonProps, 'color' | 'variant' | 'size' | 'icon' | 'block' | 'loading'>>`
   ${buttonBaseStyle}
   ${buttonColorStyle}
   ${buttonSizeStyle}
   ${btnIconStyle}
+  ${btnDisabledStyle}
 `;
 
 export const BtnIcon = styled(Icon)`
@@ -137,4 +159,10 @@ export const TextContent = styled(Text)`
   display: inline-block;
   vertical-align: middle;
   transition: .2s ease-in-out;
+`;
+
+export const BtnLoader = styled(Loader)`
+  margin-right: ${AppSpacingEnum.xs}px;
+  display: inline-block;
+  vertical-align: middle;
 `;

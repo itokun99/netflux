@@ -1,23 +1,15 @@
-import MainTemplate from '@components/templates/MainTemplate';
-import Input from '@components/molecules/Input';
-import Container from '@components/atoms/Container';
+import { useTheme } from 'styled-components';
 import BigBanner from '@components/organisms/BigBanner';
 
 function HomePage() {
 
-  const handleChange = (value: string) => {
-    console.log("handleChange", value);
-  }
-
-  const handleChangeValue = (value: string) => {
-    console.log("handleChangeValue", value);
-  }
+  const theme = useTheme();
 
   return (
-    <MainTemplate>
+    <>
       <BigBanner
         headline={`Susah Cari Kerja? Coba Kerja Koding`}
-        description='Kumpulan lowongan kerja IT, Mulai dari IT Support hingga Senior Programmer'
+        description='Kumpulan Artikel, Loker hingga proyek yang bisa bantu kamu punya pengalaman Kerja Koding hingga bisa berkarir di Dunia IT'
         actionButtons={[
           {
             id: 0,
@@ -35,7 +27,7 @@ function HomePage() {
           }
         ]}
       />
-    </MainTemplate>
+    </>
   )
 }
 

@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { NextPageWithLayout } from './_app';
 
 const HomePage = dynamic(() => import('@components/pages/Homepage'));
+const MainTemplate = dynamic(() => import('@components/templates/MainTemplate'));
 
 const Home: NextPageWithLayout = () => {
   return (
@@ -13,6 +14,14 @@ const Home: NextPageWithLayout = () => {
       </Head>
       <HomePage />
     </>
+  )
+}
+
+Home.getLayout = page => {
+  return (
+    <MainTemplate>
+      {page}
+    </MainTemplate>
   )
 }
 

@@ -10,6 +10,7 @@ const IcPlay = lazy(() => import('@assets/icons/ic-play.svg'));
 const IcInfoCircle = lazy(() => import('@assets/icons/ic-info-circle.svg'));
 const IcBar = lazy(() => import('@assets/icons/ic-bar.svg'));
 const IcClose = lazy(() => import('@assets/icons/ic-close.svg'));
+const IcGoogle = lazy(() => import('@assets/icons/ic-google.svg'));
 
 export interface IconProps {
   color?: ColorType;
@@ -27,5 +28,6 @@ export const ICONS = {
   'ic-play': IcPlay,
   'ic-info-circle': IcInfoCircle,
   'ic-bar': IcBar,
-  'ic-close': IcClose
+  'ic-close': IcClose,
+  'ic-google': IcGoogle
 }

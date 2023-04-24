@@ -10,7 +10,9 @@ export enum AppColorEnum {
   gray = 'rgb(236, 242, 255)',
   dark = 'rgb(32, 38, 46)',
   light = AppColorEnum.white,
-  inputBorder = 'rgb(188, 190, 192)'
+  inputBorder = 'rgb(188, 190, 192)',
+  bgDisabled = 'rgb(155, 164, 181)',
+  // textDisabled = 
 }
 
 export const getRgbaColor: (key: keyof typeof AppColorEnum, alpha: number) => string = (key, alpha) => {

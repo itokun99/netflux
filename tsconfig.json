@@ -76,6 +76,21 @@
       ],
       "@static/*": [
         "./src/frontend/presentations/static/*"
+      ],
+      "@backend/configs/*": [
+        "./src/backend/core/configs/*"
+      ],
+      "@backend/controllers/*": [
+        "./src/backend/presentations/controllers/*"
+      ],
+      "@backend/utils/*": [
+        "./src/backend/presentations/utils/*"
+      ],
+      "@backend/libraries/*": [
+        "./src/backend/core/libraries/*"
+      ],
+      "@backend/entities/*": [
+        "./src/backend/domain/entities/*"
       ]
     },
     "plugins": [

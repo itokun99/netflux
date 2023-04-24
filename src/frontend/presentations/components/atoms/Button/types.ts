@@ -7,5 +7,9 @@ export interface ButtonProps {
   type?: "button" | "reset" | "submit";
   size?: SizeType;
   icon?: string | React.ReactNode;
+  block?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
+  loading?: boolean;
+  loadingText?: string
 }
