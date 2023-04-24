@@ -16,8 +16,24 @@ function HomePage() {
   return (
     <MainTemplate>
       <BigBanner
-        headline='Vinland Saga: The true Warrior'
-        description='Young Thorfinn grew up listening to the stories of old sailors that had traveled the ocean and reached the place of legend, Vinland.'
+        headline={`Susah Cari Kerja? Coba Kerja Koding`}
+        description='Kumpulan lowongan kerja IT, Mulai dari IT Support hingga Senior Programmer'
+        actionButtons={[
+          {
+            id: 0,
+            title: 'Cari Kerja',
+            icon: 'ic-search',
+            color: 'primary',
+            variant: 'contained'
+          },
+          {
+            id: 1,
+            title: 'Lihat tutorial',
+            icon: 'ic-play',
+            color: 'light',
+            variant: 'outlined'
+          }
+        ]}
       />
     </MainTemplate>
   )

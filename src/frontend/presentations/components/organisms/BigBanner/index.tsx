@@ -19,7 +19,8 @@ import { AppContainerEnum } from '@styles/matrix';
 
 const BigBanner: React.FC<BigBannerProps> = ({
   headline,
-  description
+  description,
+  actionButtons = []
 }) => {
 
   const { windowSize } = useWindowSize();
@@ -39,21 +40,24 @@ const BigBanner: React.FC<BigBannerProps> = ({
             <Headline color="light" element='h2'>{headline}</Headline>
             <Description color="light">{description}</Description>
             <ActionButtonContainer>
-              <Button
-                size={btnSize}
-                icon="ic-play"
-                color='primary'
-              >
-                Nonton Sekarang
-              </Button>
-              <Button
-                size={btnSize}
-                icon="ic-info-circle"
-                color='light'
-                variant='outlined'
-              >
-                Detail
-              </Button>
+              {actionButtons.map(({
+                id,
+                title,
+                variant,
+                color,
+                icon,
+                onClick
+              }) => (
+                <Button
+                  key={`big-banner-key-${id}`}
+                  size={btnSize}
+                  icon={icon}
+                  color={color}
+                  variant={variant}
+                >
+                  {title}
+                </Button>
+              ))}
             </ActionButtonContainer>
           </InfoContainer>
         </BannerContainer>

@@ -22,19 +22,25 @@ import {
 
 // main component
 function Appbar() {
-  const bodyContainer = useRef<HTMLElement>();
-  const portalContainer = useRef<HTMLElement>();
+
+  // memo
   const menus = useMemo(() => APP_MENUS, []);
+
+  // states
   const [sidebarReady, setSidebarReady] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-
   const { windowSize, isDesktopSize } = useWindowSize();
-
   const [searchBarFocus, setSearchBarFocus] = useState(false);
   const [showLeftSection, setShowLeftSection] = useState(true);
 
+
+  // refs
+  const portalContainer = useRef<HTMLElement>();
+
+  // other variables
   const isShowLeftSection = windowSize.width && windowSize.width > AppContainerEnum.phoneLandscape ? true : showLeftSection;
 
+  // methods / functions
   const handleFocusSearchBar = () => {
     setSearchBarFocus(true);
   }
@@ -66,6 +72,32 @@ function Appbar() {
     }
   }, [sidebarReady, showSidebar])
 
+  // render functions
+  const renderActionButtonDesktop = () => {
+    return (
+      <ActionButtonWrapper>
+        <Button size="small" color="primary" variant="outlined">Masuk</Button>
+      </ActionButtonWrapper>
+    )
+  }
+
+  const renderSidebar = () => {
+    return (
+      <>
+        <ActionButtonWrapper>
+          <IconButton onClick={handleToggleSidebar} variant='contained' color='primary' icon="ic-bar" size="small" />
+        </ActionButtonWrapper>
+        {sidebarReady && portalContainer.current && createPortal((
+          <Sidebar
+            show={showSidebar}
+            onClose={handleToggleSidebar}
+            menus={menus}
+          />
+        ), portalContainer.current)}
+      </>
+    )
+  }
+
   return (
     <Wrapper>
       <Container>
@@ -80,7 +112,7 @@ function Appbar() {
             <SearchBar
               iconAlign='end'
               icon='ic-search'
-              placeholder="Search..."
+              placeholder={`Cari "Junior Developer"`}
               type="search"
               size="small"
               name="q"
@@ -88,24 +120,7 @@ function Appbar() {
               onBlur={handleBlurSearchBar}
             />
           </SearchBarForm>
-          {isDesktopSize ? (
-            <ActionButtonWrapper>
-              <Button size="small" color="primary" variant="outlined">Masuk</Button>
-            </ActionButtonWrapper>
-          ) : (
-            <>
-              <ActionButtonWrapper>
-                <IconButton onClick={handleToggleSidebar} variant='contained' color='primary' icon="ic-bar" size="small" />
-              </ActionButtonWrapper>
-              {sidebarReady && portalContainer.current && createPortal((
-                <Sidebar
-                  show={showSidebar}
-                  onClose={handleToggleSidebar}
-                  menus={menus}
-                />
-              ), portalContainer.current)}
-            </>
-          )}
+          {isDesktopSize ? renderActionButtonDesktop() : renderSidebar()}
         </RightSection>
       </Container>
     </Wrapper>

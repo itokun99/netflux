@@ -23,6 +23,9 @@
       "@assets/icons/*": [
         "./src/frontend/core/assets/icons/*"
       ],
+      "@assets/images/*": [
+        "./src/frontend/core/assets/images/*"
+      ],
       "@components/atoms": [
         "./src/frontend/presentations/components/atoms"
       ],
