@@ -21,77 +21,65 @@
     "baseUrl": "./",
     "paths": {
       "@assets/icons/*": [
-        "./src/frontend/core/assets/icons/*"
+        "./src/main/core/assets/icons/*"
       ],
       "@assets/images/*": [
-        "./src/frontend/core/assets/images/*"
-      ],
-      "@components/atoms": [
-        "./src/frontend/presentations/components/atoms"
+        "./src/main/core/assets/images/*"
       ],
       "@components/atoms/*": [
-        "./src/frontend/presentations/components/atoms/*"
-      ],
-      "@components/molecules": [
-        "./src/frontend/presentations/components/molecules"
+        "./src/main/presentations/frontend/components/atoms/*"
       ],
       "@components/molecules/*": [
-        "./src/frontend/presentations/components/molecules/*"
-      ],
-      "@components/organisms": [
-        "./src/frontend/presentations/components/organisms"
+        "./src/main/presentations/frontend/components/molecules/*"
       ],
       "@components/organisms/*": [
-        "./src/frontend/presentations/components/organisms/*"
-      ],
-      "@components/templates": [
-        "./src/frontend/presentations/components/templates"
+        "./src/main/presentations/frontend/components/organisms/*"
       ],
       "@components/templates/*": [
-        "./src/frontend/presentations/components/templates/*"
-      ],
-      "@components/pages": [
-        "./src/frontend/presentations/components/pages"
+        "./src/main/presentations/frontend/components/templates/*"
       ],
       "@components/pages/*": [
-        "./src/frontend/presentations/components/pages/*"
-      ],
-      "@styles": [
-        "./src/frontend/core/styles"
+        "./src/main/presentations/frontend/components/pages/*"
       ],
       "@styles/*": [
-        "./src/frontend/core/styles/*"
+        "./src/main/presentations/frontend/styles/*"
       ],
       "@libraries/*": [
-        "./src/frontend/core/libraries/*"
+        "./src/main/core/libraries/*"
       ],
       "@hooks/*": [
-        "./src/frontend/presentations/hooks/*"
-      ],
-      "@utils": [
-        "./src/frontend/presentations/utils"
-      ],
-      "@general-types": [
-        "./src/frontend/presentations/general-types"
+        "./src/main/presentations/frontend/hooks/*"
       ],
       "@static/*": [
-        "./src/frontend/presentations/static/*"
+        "./src/main/presentations/frontend/static/*"
       ],
-      "@backend/configs/*": [
-        "./src/backend/core/configs/*"
+      "@configs/*": [
+        "./src/main/core/configs/*"
       ],
-      "@backend/controllers/*": [
-        "./src/backend/presentations/controllers/*"
+      "@controllers/*": [
+        "./src/main/presentations/backend/controllers/*"
+      ],
+      "@repositories/*": [
+        "./src/main/domain/repositories/*"
+      ],
+      "@entities/*": [
+        "./src/main/domain/entities/*"
+      ],
+      "@usecases/*": [
+        "./src/main/domain/usecases/*"
+      ],
+      "@frontend/utils/*": [
+        "./src/main/presentations/frontend/utils/*"
+      ],
+      "@frontend/types/*": [
+        "./src/main/presentations/frontend/types/*"
       ],
       "@backend/utils/*": [
-        "./src/backend/presentations/utils/*"
+        "./src/main/presentations/backend/utils/*"
       ],
-      "@backend/libraries/*": [
-        "./src/backend/core/libraries/*"
+      "@backend/types/*": [
+        "./src/main/presentations/backend/types/*"
       ],
-      "@backend/entities/*": [
-        "./src/backend/domain/entities/*"
-      ]
     },
     "plugins": [
       {

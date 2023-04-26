@@ -1,4 +1,4 @@
-import StyledComponentsRegistry from '@libraries/styled-component/registry';
+import StyledComponentsRegistry from 'src/main/core/libraries/styled-component/registry';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

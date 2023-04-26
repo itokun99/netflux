@@ -1,6 +1,5 @@
 import '@libraries/google-font/index.css';
 import '@libraries/normalizecss/normalizecss.css';
-import { useState } from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import type { NextPage } from 'next';
