@@ -1,4 +1,5 @@
-import { SizeType, ColorType, ButtonVariantType } from '@general-types';
+import { ButtonVariantType } from '@frontend/types/button';
+import { SizeType, ColorType } from '@frontend/types/common';
 
 export interface IconButtonProps {
   icon: string;

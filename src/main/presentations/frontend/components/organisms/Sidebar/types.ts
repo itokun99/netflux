@@ -1,4 +1,4 @@
-import { MenuItemInterface } from '@general-types';
+import { MenuItemInterface } from '@frontend/types/menu';
 
 export interface SidebarProps {
   menus: MenuItemInterface[];

@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { ColorType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
 import { AppSpacingEnum } from '@styles/matrix';
 
 // icon imports

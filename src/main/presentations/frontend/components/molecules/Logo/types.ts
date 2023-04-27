@@ -1,4 +1,4 @@
-import { ColorType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
 
 export interface LogoProps {
   color?: ColorType,

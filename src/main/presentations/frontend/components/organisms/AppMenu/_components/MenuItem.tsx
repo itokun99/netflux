@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 import AppLink from '@components/atoms/Link';
-import { UrlType } from '@general-types';
+import { UrlType } from '@frontend/types/url';
 import { FontSizeEnum } from '@styles/fonts';
 import { AppSpacingEnum } from '@styles/matrix';
 import { AppColorEnum } from '@styles/colors';

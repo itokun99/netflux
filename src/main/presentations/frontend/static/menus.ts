@@ -1,4 +1,4 @@
-import { MenuItemInterface } from '@general-types';
+import { MenuItemInterface } from '@frontend/types/menu';
 
 export const APP_MENUS: MenuItemInterface[] = [
   {

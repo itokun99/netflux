@@ -1,4 +1,4 @@
-import { SizeType } from '@general-types';
+import { SizeType } from '@frontend/types/common';
 import { AppSpacingEnum } from '@styles/matrix';
 
 export const getIconSize = (size?: SizeType) => {

@@ -1,4 +1,5 @@
-import { ButtonVariantType, ColorType, SizeType } from '@general-types';
+import type { ButtonVariantType } from '@frontend/types/button';
+import type { ColorType, SizeType } from '@frontend/types/common';
 
 export interface ButtonProps {
   children: React.ReactNode;

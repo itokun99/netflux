@@ -1,4 +1,4 @@
-import { ColorType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
 
 export const getBtnIconColor = (variant?: string, color?: ColorType) => {
   if (variant === 'outlined') {

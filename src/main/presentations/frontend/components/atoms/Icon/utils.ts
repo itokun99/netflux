@@ -1,4 +1,4 @@
-import { ColorType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
 import { AppSpacingEnum } from '@styles/matrix';
 import { AppColorEnum} from '@styles/colors';
 

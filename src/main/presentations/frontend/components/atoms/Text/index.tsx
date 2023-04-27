@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled, { css } from 'styled-components';
 import { AppColorEnum } from '@styles/colors';
-import { ColorType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
 
 export type TextElementType = 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'label';
 

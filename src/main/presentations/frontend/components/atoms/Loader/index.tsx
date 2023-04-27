@@ -2,7 +2,7 @@ import { memo } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { AppColorEnum } from '@styles/colors';
 import { AppSpacingEnum } from '@styles/matrix';
-import { ColorType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
 
 const spin = keyframes`
   0% { transform: rotate(0deg); }

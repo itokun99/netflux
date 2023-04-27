@@ -1,4 +1,5 @@
-import { ColorType, InputType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
+import { InputType } from '@frontend/types/input';
 
 export interface InputProps {
   id?: string;

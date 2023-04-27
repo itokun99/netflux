@@ -2,7 +2,8 @@ import { memo } from 'react';
 import styled from 'styled-components';
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { AppColorEnum } from '@styles/colors';
-import { ColorType, UrlType } from '@general-types';
+import { ColorType } from '@frontend/types/common';
+import { UrlType } from '@frontend/types/url';
 
 export interface LinkProps extends NextLinkProps {
   children?: React.ReactNode | React.ReactElement | JSX.Element | null;

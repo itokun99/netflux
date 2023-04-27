@@ -1,4 +1,5 @@
-import { ButtonVariantType, ColorType } from '@general-types';
+import { ButtonVariantType } from '@frontend/types/button';
+import { ColorType } from '@frontend/types/common';
 
 export interface ActionButtonInterface {
   id: number;
