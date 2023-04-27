@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { API_CONFIG } from '@configs/app';
 
 // instance of xhr / fetch call it "fetcher"
 export const fetcher = axios.create({
-  timeout: 3600,
-  baseURL: typeof window !== 'undefined' ? API_CONFIG.baseUrl: undefined
+  timeout: 3600
 });
 
 // implement interceptor

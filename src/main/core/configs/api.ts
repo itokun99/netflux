@@ -1,6 +1,8 @@
-export enum AdminApiEndpoint {
-  googleAuth = '/admin/auth/google',
-  googleAuthToken = '/admin/auth/google/token'
+import { API_CONFIG } from '@configs/app';
+
+export const AdminApiEndpoint = {
+  googleAuth: API_CONFIG.baseUrl + '/admin/auth/google',
+  googleAuthToken: API_CONFIG.baseUrl + '/admin/auth/google/token'
 }
 
 export enum UserApiEndpoint {}

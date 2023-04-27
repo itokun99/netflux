@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '@components/atoms/Button';
 import Logo from '@components/molecules/Logo';
@@ -5,7 +6,7 @@ import Text from '@components/atoms/Text';
 import Container from '@components/atoms/Container';
 import { AppContainerEnum } from '@styles/matrix';
 import { FontSizeEnum } from '@styles/fonts';
-import type { GetServerSideProps } from 'next';
+import { getLoginUrlAdmin } from '@usecases/frontend/auth';
 
 
 const Wrapper = styled.div`
@@ -36,6 +37,22 @@ const Headline = styled(Text)`
 
 
 const Login = () => {
+
+  const [loading, setLoading] = useState(false);
+
+  const handleClickLogin = () => {
+    setLoading(true);
+    getLoginUrlAdmin().then(url => {
+      if (!url) {
+        throw new Error("url is empty");
+      }
+      window.location.href = url;
+    }).catch(_err => {
+      setLoading(false);
+      window.alert("Login Error")
+    })
+  }
+
   return (
     <Wrapper>
       <ContentWrapper>
@@ -49,7 +66,8 @@ const Login = () => {
             variant='contained'
             block
             icon="ic-google"
-            loading={false}
+            loading={loading}
+            onClick={handleClickLogin}
           >
             Masuk dengan Google
           </Button>
@@ -60,13 +78,4 @@ const Login = () => {
   )
 }
 
-
-export const getServerSideProps: GetServerSideProps<{}> = async (ctx) => {
-  const query = ctx.query;
-  console.log("code ==>", query);
-  return {
-    props: {}
-  }
-}
-
-export default Login;
+export default Login

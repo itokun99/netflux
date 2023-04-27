@@ -1,26 +1,23 @@
 import type { NextApiResponse, NextApiRequest } from 'next';
-
-export interface JsonResponseInterface<T = any> {
-  status: number;
-  code: string;
-  message: string;
-  data?: T
-}
+import { ControllerHandleType, JsonResponse } from '@backend/types/http';
 
 type ErrorCaseType = 
   'method-not-allowed' |
   'unauthorized' |
   'internal-server-error' |
-  'google-auth-error'
+  'google-auth-error' |
+  'page-not-found'
 
-export const createResponseError = (errorCase: ErrorCaseType, errorData?: any): JsonResponseInterface => {
+export const createResponseError = (errorCase: ErrorCaseType, errorData?: any): JsonResponse => {
   switch(errorCase) {
     case 'method-not-allowed':
       return createJsonResponse({ status: 405, code: 'APP-405', message: 'Method not allowed' });
     case 'unauthorized':
       return createJsonResponse({ status: 401, code: 'APP-401', message: 'Unauthorized' });
     case 'google-auth-error':
-      return createJsonResponse({ status: 400, code: 'GOOGLE-AUTH-400', message: 'Google auth failed', data: errorData });
+      return createJsonResponse({ status: 400, code: 'GOOGLE-AUTH-400', message: 'Authorization failed, please re-login', data: errorData });
+    case 'page-not-found':
+      return createJsonResponse({ status: 404, code: 'APP-404', message: 'Page not found' });
     default:
       return createJsonResponse({ status: 500, code: 'APP-500', message: 'Internal server error' });
   }
@@ -35,7 +32,7 @@ export const createJsonResponse = <T = any>({
   code,
   message,
   data
-}: JsonResponseInterface<T>) => {
+}: JsonResponse<T>) => {
   return {
     status,
     code,
@@ -43,9 +40,6 @@ export const createJsonResponse = <T = any>({
     data
   }
 }
-
-
-export type ControllerHandleType<T = any> = (req: NextApiRequest, res: NextApiResponse<T>) => void;
 
 interface WithControllerInterface {
   get?: ControllerHandleType;

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic';
-import { NextPageWithLayout } from './_app';
+import { NextPageWithLayout } from '@frontend/types/next';
 
 const HomePage = dynamic(() => import('@components/pages/Homepage'));
 const MainTemplate = dynamic(() => import('@components/templates/MainTemplate'));
@@ -17,9 +17,9 @@ const Home: NextPageWithLayout = () => {
   )
 }
 
-Home.getLayout = page => {
+Home.getLayout = (page, pageProps) => {
   return (
-    <MainTemplate>
+    <MainTemplate {...pageProps}>
       {page}
     </MainTemplate>
   )

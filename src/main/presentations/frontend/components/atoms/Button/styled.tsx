@@ -141,7 +141,7 @@ export const btnDisabledStyle = css<Pick<ButtonProps, 'disabled' | 'color'>>(pro
   `
 });
 
-export const Btn = styled.button<Pick<ButtonProps, 'color' | 'variant' | 'size' | 'icon' | 'block' | 'loading'>>`
+export const Btn = styled.button<Pick<ButtonProps & { $loading?: boolean }, 'color' | 'variant' | 'size' | 'icon' | 'block' | '$loading'>>`
   ${buttonBaseStyle}
   ${buttonColorStyle}
   ${buttonSizeStyle}

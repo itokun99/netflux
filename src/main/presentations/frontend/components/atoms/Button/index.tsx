@@ -63,7 +63,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={!disabled && !loading ? onClick : undefined}
       block={block}
       disabled={disabled}
-      loading={loading}
+      $loading={loading}
     >
       {renderContent()}
     </Btn>

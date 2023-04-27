@@ -1,23 +1,32 @@
 import dynamic from 'next/dynamic';
-import type { GetServerSideProps } from 'next';
+import Head from 'next/head';
+import { createRouter } from 'next-connect';
+import type { NextPage, GetServerSidePropsContext } from 'next';
+import { validateLoginAdmin } from '@usecases/frontend/auth';
 
 const LoginPage = dynamic(() => import('@components/pages/Login'))
 
-const Login = () => {
-  return <LoginPage />;
+const Login: NextPage = ({ error }: { error?: { message: string } }) => {
+
+  console.log("error ==>", error)
+
+  return (
+    <>
+      <Head>
+        <title>Admin | Login</title>
+      </Head>
+      <LoginPage />
+    </>
+  );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
 
-  const req = context.req;
-
-
-  console.log("context req ==>", req);
+const router = createRouter()
+router.get(validateLoginAdmin)
 
 
-  return {
-    props: {}
-  }
+export const getServerSideProps = async ({ req, res, query }: GetServerSidePropsContext) => {
+  return router.run(req, res);
 }
 
 export default Login;

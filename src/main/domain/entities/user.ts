@@ -5,9 +5,9 @@ export interface UserAuth {
   expiresIn?: number;
   tokenType?: string;
   scope?: string;
-  refresToken?: string;
+  refreshToken?: string;
   provider?: 'google' | 'email';
-  tokenId?: string; 
+  tokenId?: string;
 }
 export interface User {
   id: string;
