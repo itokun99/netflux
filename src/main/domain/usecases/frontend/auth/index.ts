@@ -9,11 +9,11 @@ export const getLoginUrlAdmin = async () => {
   try {
     const authUrl = await getAuthUrlAdmin();
 
-    if(!authUrl.data?.url) {
+    if(!authUrl) {
       throw new Error('url is empty');
     }
 
-    return authUrl.data.url;
+    return authUrl;
   } catch (err: any) {
     console.log('getLoginUrlAdmin err', err);
     throw err;
@@ -51,12 +51,12 @@ export const validateLoginAdmin = async (req: IncomingMessage, res: ServerRespon
 
     // save login data to session
     session.admin = data;
-    session.commit();
+    await session.commit();
 
     // redirect to dashboard when validated user success
     return {
       props: {
-        data
+        user: data
       },
       redirect: {
         destination: '/admin/dashboard'
@@ -76,4 +76,18 @@ export const validateLoginAdmin = async (req: IncomingMessage, res: ServerRespon
   }
 }
 
+export const validateAuthAdminPage = async (req: IncomingMessage,  res: ServerResponse<IncomingMessage>) => {
+  const session = await getSession(req, res);
+  if (!session.admin) {
+    return {
+      props: {},
+      notFound: true
+    }
+  }
 
+  return {
+    props: {
+      user: session.admin
+    }
+  }
+}

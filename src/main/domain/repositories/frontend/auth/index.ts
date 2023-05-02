@@ -6,7 +6,7 @@ import { User } from '@entities/user';
 export function getAuthUrlAdmin() {
   return fetcher
     .post<ApiResponse<{ url: string }>>(AdminApiEndpoint.googleAuth)
-    .then(res => res.data)
+    .then(res => res.data.data?.url)
     .catch(err => {
       throw err
     });
@@ -15,7 +15,7 @@ export function getAuthUrlAdmin() {
 export function getAuthTokenAdmin(code: string) {
   return fetcher
     .post<ApiResponse<User>>(AdminApiEndpoint.googleAuthToken, { code })
-    .then(res => res.data)
+    .then(res => res.data.data)
     .catch(err => {
       throw err
     });  

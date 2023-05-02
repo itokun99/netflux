@@ -28,7 +28,7 @@ const colorStyle = css<Pick<IconButtonProps, 'color' | 'variant'>>(({ color, var
 
   if (variant === 'contained' && color && AppColorEnum[color]) {
     const baseColor = AppColorEnum[color];
-    return `
+    return css`
       background-color: ${baseColor};
       border-color: ${baseColor};
       
@@ -45,7 +45,7 @@ const colorStyle = css<Pick<IconButtonProps, 'color' | 'variant'>>(({ color, var
 
   if (variant === 'outlined' && color && AppColorEnum[color]) {
     const baseColor = AppColorEnum[color];
-    return `
+    return css`
       background-color: transparent;
       border-color: ${baseColor};
       > svg {
@@ -77,11 +77,11 @@ export const IconBtn = styled(Icon)`
 const sizeStyle = css<Pick<IconButtonProps, 'size'>>(({ size }) => {
   switch (size) {
     case 'small':
-      return 'width: 32px; height: 32px;'
+      return css`width: 32px; height: 32px;`
     case 'large':
-      return 'width: 54px; height: 54px'
+      return css`width: 54px; height: 54px`
     default:
-      return 'width: 48px; height: 48px;'
+      return css`width: 48px; height: 48px;`
   }
 })
 

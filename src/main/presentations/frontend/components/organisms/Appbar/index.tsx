@@ -1,6 +1,7 @@
 import { memo, useMemo, useEffect, useRef, useReducer, Reducer } from 'react';
+import type { FC } from 'react';
 import { createPortal } from 'react-dom';
-import { APP_MENUS } from '@static/menus';
+import { USER_MENUS } from '@configs/menu';
 import Button from '@components/atoms/Button';
 import IconButton from '@components/atoms/IconButton';
 import { AppContainerEnum } from '@styles/matrix';
@@ -8,6 +9,7 @@ import useWindowSize from '@hooks/useWindowSize';
 import { toggleBodyScroll } from '@frontend/utils/helper';
 import Sidebar from '../Sidebar';
 import AppMenu from '../AppMenu';
+import Avatar from '@components/atoms/Avatar';
 
 import {
   Wrapper,
@@ -21,17 +23,25 @@ import {
 } from './styled';
 
 import { appbarState, appbarReducer } from './states';
-
+import { AppbarProps } from './types';
 
 
 
 
 
 // main component
-function Appbar() {
+const Appbar: FC<AppbarProps> = ({
+  showLogo = true,
+  fullContainer = false,
+  showActionButton = false,
+  showMenu = false,
+  showSearchbar = false,
+  user
+}) => {
 
   // memo
-  const menus = useMemo(() => APP_MENUS, []);
+  const menus = useMemo(() => USER_MENUS, []);
+  const isAuthenticated = useMemo(() => Boolean(user), [user]);
 
   // reducer
   const [state, dispatch] = useReducer(appbarReducer, appbarState)
@@ -75,6 +85,20 @@ function Appbar() {
 
   // render functions
   const renderActionButtonDesktop = () => {
+
+    if (isAuthenticated) {
+      return (
+        <Avatar
+          variant='text'
+          value="Indrawan Lisanto"
+          size={36}
+          rounded
+        />
+      )
+    }
+
+    if (!showActionButton) return null;
+
     return (
       <ActionButtonWrapper>
         <Button size="small" color="primary" variant="outlined">Masuk</Button>
@@ -83,6 +107,8 @@ function Appbar() {
   }
 
   const renderSidebar = () => {
+    if (!showMenu) return null;
+
     return (
       <>
         <ActionButtonWrapper>
@@ -93,6 +119,8 @@ function Appbar() {
             show={state.showSidebar}
             onClose={handleToggleSidebar}
             menus={menus}
+            variant='show-hide'
+            position='right'
           />
         ), portalContainer.current)}
       </>
@@ -101,26 +129,28 @@ function Appbar() {
 
   return (
     <Wrapper>
-      <Container>
+      <Container fullWidth={fullContainer} >
         {isShowLeftSection && (
           <LeftSection>
-            <AppLogo color="primary" size={34} />
-            {isDesktopSize && <AppMenu items={menus} />}
+            {showLogo && <AppLogo color="primary" size={34} />}
+            {showMenu && isDesktopSize && <AppMenu items={menus} />}
           </LeftSection>
         )}
         <RightSection>
-          <SearchBarForm action='/search'>
-            <SearchBar
-              iconAlign='end'
-              icon='ic-search'
-              placeholder={`Cari "Junior Developer"`}
-              type="search"
-              size="small"
-              name="q"
-              onFocus={handleFocusSearchBar}
-              onBlur={handleBlurSearchBar}
-            />
-          </SearchBarForm>
+          {showSearchbar && (
+            <SearchBarForm action='/search'>
+              <SearchBar
+                iconAlign='end'
+                icon='ic-search'
+                placeholder={`Cari "Junior Developer"`}
+                type="search"
+                size="small"
+                name="q"
+                onFocus={handleFocusSearchBar}
+                onBlur={handleBlurSearchBar}
+              />
+            </SearchBarForm>
+          )}
           {isDesktopSize ? renderActionButtonDesktop() : renderSidebar()}
         </RightSection>
       </Container>

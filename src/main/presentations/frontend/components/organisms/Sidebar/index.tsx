@@ -14,29 +14,54 @@ import {
 const Sidebar: React.FC<SidebarProps> = ({
   menus,
   show,
-  onClose
+  variant = 'show-hide',
+  position = 'right',
+  onClose,
+  showTopSection = true,
+  showBottomSection = true
 }) => {
   if (!show) return null
 
+  const renderBackdrop = () => {
+    if (variant !== 'show-hide') return null;
+
+    return <Backdrop onClick={onClose} />
+  }
+
+  const renderCloseButton = () => {
+    if (variant !== 'show-hide') return null;
+
+    return (
+      <IconButton
+        icon='ic-close'
+        size='small'
+        variant='outlined'
+        color='primary'
+        onClick={onClose}
+      />
+    )
+  }
+
   return (
     <>
-      <Backdrop onClick={onClose} />
-      <Wrapper>
-        <TopSection>
-          <IconButton
-            icon='ic-close'
-            size='small'
-            variant='outlined'
-            color='primary'
-            onClick={onClose}
-          />
-        </TopSection>
+      {renderBackdrop()}
+      <Wrapper
+        variant={variant}
+        position={position}
+      >
+        {showTopSection && (
+          <TopSection>
+            {renderCloseButton()}
+          </TopSection>
+        )}
         <MiddleSection>
           <Menu items={menus} />
         </MiddleSection>
-        <BottomSection>
-          <Text color="dark" element="p">Netflux | Movie for Freedom @ 2023</Text>
-        </BottomSection>
+        {showBottomSection && (
+          <BottomSection>
+            <Text color="dark" element="p">Kerja Koding 2023</Text>
+          </BottomSection>
+        )}
       </Wrapper>
     </>
   )

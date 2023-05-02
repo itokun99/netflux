@@ -2,8 +2,8 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic';
 import { NextPageWithLayout } from '@frontend/types/next';
 
-const HomePage = dynamic(() => import('@components/pages/Homepage'));
-const MainTemplate = dynamic(() => import('@components/templates/MainTemplate'));
+const Page = dynamic(() => import('@components/pages/Homepage'));
+const Layout = dynamic(() => import('@components/templates/UserLayout'));
 
 const Home: NextPageWithLayout = () => {
   return (
@@ -12,16 +12,16 @@ const Home: NextPageWithLayout = () => {
         <title>Kerja Koding - Loker IT untuk Pemula</title>
         <meta name="description" content="Website pencarian kerja dan artikel seputar dunia Kerja IT" />
       </Head>
-      <HomePage />
+      <Page />
     </>
   )
 }
 
 Home.getLayout = (page, pageProps) => {
   return (
-    <MainTemplate {...pageProps}>
+    <Layout {...pageProps}>
       {page}
-    </MainTemplate>
+    </Layout>
   )
 }
 

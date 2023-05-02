@@ -4,12 +4,8 @@ import { createRouter } from 'next-connect';
 import type { NextPage, GetServerSidePropsContext } from 'next';
 import { validateLoginAdmin } from '@usecases/frontend/auth';
 
-const LoginPage = dynamic(() => import('@components/pages/Login'))
-
+const LoginPage = dynamic(() => import('@components/pages/Login'));
 const Login: NextPage = ({ error }: { error?: { message: string } }) => {
-
-  console.log("error ==>", error)
-
   return (
     <>
       <Head>
@@ -25,7 +21,7 @@ const router = createRouter()
 router.get(validateLoginAdmin)
 
 
-export const getServerSideProps = async ({ req, res, query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ req, res }: GetServerSidePropsContext) => {
   return router.run(req, res);
 }
 

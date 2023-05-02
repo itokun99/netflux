@@ -1,3 +1,4 @@
+import { User } from '@entities/user';
 export interface AppbarState {
   sidebarReady: boolean;
   showSidebar: boolean;
@@ -11,3 +12,13 @@ export type AppbarActionType =
 'searchbar-focus' |
 'searchbar-blur' |
 'reset'
+
+
+export interface AppbarProps {
+  showLogo?: boolean;
+  showMenu?: boolean;
+  showSearchbar?: boolean;
+  showActionButton?: boolean;
+  fullContainer?: boolean;
+  user?: User
+}

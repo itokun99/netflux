@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getRgbaColor, AppColorEnum } from '@styles/colors';
 import { AppSpacingEnum } from '@styles/matrix';
 import { FontSizeEnum } from '@styles/fonts';
 import AppMenu from '@components/organisms/AppMenu';
+import { SidebarProps } from './types';
 
-export const Wrapper = styled.div`
+const baseStyle = css`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -17,6 +18,38 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 4px 0px 25px ${getRgbaColor('dark', 0.1)};
+`
+
+const position = css<Pick<SidebarProps, 'position'>>(({ position }) => {
+  if (position === 'left') {
+    return css`
+      right: auto;
+      left: 0;
+    `;
+  }
+
+  return css`
+    left: auto;
+    right: 0;
+  `;
+})
+
+const variantStyle = css<Pick<SidebarProps, 'variant'>>(({ variant }) => {
+  if (variant === 'stayed') {
+    return css`
+      z-index: 0;
+      padding-top: ${AppSpacingEnum.appbar}px;
+      max-width: 300px;
+    `
+  }
+
+  return '';
+})
+
+export const Wrapper = styled.div<Pick<SidebarProps, 'position' | 'variant'>>`
+  ${baseStyle}
+  ${position}
+  ${variantStyle}
 `;
 
 export const Backdrop = styled.div`
@@ -49,7 +82,7 @@ export const BottomSection = styled.div`
 export const Menu = styled(AppMenu)`
   > li {
     display: block;
-    border-bottom: 1px solid ${getRgbaColor('dark', 0.2)};
+    border-bottom: 1px solid ${getRgbaColor('dark', 0.1)};
     margin-right: 0;
 
     a {
